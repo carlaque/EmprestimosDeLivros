@@ -1,10 +1,12 @@
 package model;
 
+import java.util.Date;
+
 public abstract class Leitor {
-	private String nome;
-	private String endereco;
-	private String email;
-	private int emprestimosCorrentes; 
+	protected String nome;
+	protected String endereco;
+	protected String email;
+	protected int emprestimosCorrentes; 
 	
 	
 	public void Cadastrar() {
@@ -19,7 +21,7 @@ public abstract class Leitor {
 		
 	}
 	
-	public boolean verificarDisponibilidadeRenovacao() {
+	public boolean verificarDisponibilidadeRenovacao(Date dataEmprestimo) {
 		return true;
 	}
 	
