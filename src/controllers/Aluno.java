@@ -2,7 +2,7 @@ package controllers;
 
 import java.util.Date;
 
-public class Aluno extends Leitor {
+public class Aluno extends Leitor  {
 	private String RA;
 	
 	public String getRA() {
