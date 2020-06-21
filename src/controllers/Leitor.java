@@ -5,7 +5,6 @@ import java.util.Date;
 import model.Alunos;
 
 public abstract class Leitor{
-	private static Alunos arquivo;
 	
 	protected int codigo;
 	protected String nome;
@@ -14,6 +13,7 @@ public abstract class Leitor{
 	protected String telefone;
 	protected int emprestimosCorrentes;
 
+	public int getCodigo() { return codigo; }
 	
 	public String getNome() { return nome; }
 	
@@ -45,12 +45,13 @@ public abstract class Leitor{
 	
 	public Leitor(){ }
 	
-	public void cadastrar(int codigo, String nome, String endereco, String telefone, String email, String documento) {
+	public void cadastrar(int codigo, String nome, String endereco, String telefone, String email, String documento, int emprestimosCorrentes) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.email = email;
+		this.emprestimosCorrentes = emprestimosCorrentes;
 		this.setDocumento(documento);
 	}
 	

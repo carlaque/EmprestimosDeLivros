@@ -8,15 +8,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-import controllers.Aluno;
 import controllers.Leitor;
 import controllers.ListaLeitor;
-import controllers.NO;
+import controllers.Professor;
 
-public class Alunos implements IGerenciadorArquivos {
-	private final String nome =  "alunos.csv";
+public class Professores implements IGerenciadorArquivos {
+	private final String nome =  "professores.csv";
 	private final String path =  "./";
-	private String cabecalho = "codigo; nome; endereco; email; telefone; RA; Emprestimos Correntes;\n";
+	private String cabecalho = "codigo; nome; endereco; email; telefone; CPF; emprestimos correntes\n";
 	private ListaLeitor lista;
 	
 	@Override
@@ -33,9 +32,9 @@ public class Alunos implements IGerenciadorArquivos {
 			while(linha != null) {
 				String[] aux = linha.split(";");
 				if(!aux[0].equals("codigo")) {
-					Aluno aluno = new Aluno();
-					aluno.cadastrar(Integer.parseInt(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5], Integer.parseInt(aux[6]));
-					lista.adicionaFinal(aluno);
+					Professor professor = new Professor();
+					professor.cadastrar(Integer.parseInt(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5], Integer.parseInt(aux[6]));
+					lista.adicionaFinal(professor);
 				}
 				linha = buffer.readLine();
 			}
@@ -48,49 +47,31 @@ public class Alunos implements IGerenciadorArquivos {
 		}
 		
 	}
-	
-	public void salvarLista() throws IOException{
-		limparArquivo();
+
+	@Override
+	public void salvarLista() throws IOException {
 		File arq = new File(path, nome);
 		FileWriter writer= new FileWriter(arq, true);
 		PrintWriter print = new PrintWriter(writer);
-		
 		while(!lista.vazia()) {
-			Aluno a = (Aluno) lista.removeDoInicio();
+			Professor a = (Professor) lista.removeDoInicio();
 			String conteudo = a.getCodigo() + ";"
 					+ a.getNome() + ";"
 					+ a.getEndereco() + ";"
 					+ a.getEmail() + ";"
 					+ a.getTelefone() + ";"
-					+ a.getRA() + ";"
+					+ a.getCpf() + ";"
 					+ a.getEmprestimosCorrentes() + "\n";
 			
 			print.write(conteudo);
 		}
 		
+		
 		print.flush();
 		print.close();
 		writer.close();
-		
 	}
 	
-	@Override
-	public void limparArquivo() throws IOException {
-		File arq = new File(path, nome );
-		
-		if( arq.delete() ) System.out.println("Arquivo Deletado Com sucesso");
-		arq = new File(path, nome );
-		FileWriter writer= new FileWriter(arq, true);
-		PrintWriter print = new PrintWriter(writer);
-		print.write(cabecalho);
-		print.flush();
-		print.close();
-		writer.close();
-	
-		
-		
-	}
-
 	@Override
 	public void createFile() throws IOException {
 		File dir = new File(path);
@@ -111,45 +92,28 @@ public class Alunos implements IGerenciadorArquivos {
 		}else {
 			throw new IOException();
 		}
-		
 	}
 
 	@Override
 	public <T> void insereCadastro(T dados) throws IOException {
-		lista.adicionaFinal((Leitor) dados);
+		lista.adicionaFinal((Leitor) dados);	
 	}
 
 	@Override
-	public <T> void editarCadastro(int codigo, T dadosNovos) throws IOException {
-		int posicao = getPosicaoDoCodigo(codigo);
-		if(posicao > -1) {
-			lista.removeDaPosicao(posicao+1);
-			lista.adicionaNaPosicao((Leitor) dadosNovos, posicao);
-		}
-		else System.out.println("codigo invalido");
+	public <T> void editarCadastro(T antigo, T novo) throws IOException {
+		int posicao = lista.buscarPosicaoElemento((Leitor) antigo);
+		lista.removeDaPosicao(posicao);
+		lista.adicionaNaPosicao((Leitor) novo, posicao);
 	}
 
+
 	@Override
-	public <T> void excluirCadastro(int codigo) throws IOException {
-		int posicao = getPosicaoDoCodigo(codigo);
-		if(posicao > -1)lista.removeDaPosicao(posicao+1);
-		else System.out.println("codigo invalido");
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T> int getPosicaoDoCodigo(int codigo) {
-		NO<T> aux = (NO<T>) lista.getInicio();
-		int pos = -1;
-		boolean percorre = true;
-		while(aux.getProximo() != null && percorre) {
-			Leitor l = (Leitor) aux.getDado();
-			if(l.getCodigo() == codigo) percorre = false;
-			aux = aux.getProximo();
-			pos++;
-		}
+	public <T> void excluirCadastro(T dados) throws IOException {
+		int posicao = lista.buscarPosicaoElemento((Leitor) dados);
+		lista.removeDaPosicao(posicao);
 		
-		return pos;
 	}
 
+	
 
 }

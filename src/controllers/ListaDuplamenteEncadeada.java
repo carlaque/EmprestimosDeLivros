@@ -7,6 +7,10 @@ public class ListaDuplamenteEncadeada<T> {
 		inicio = null;
 	}
 	
+	public NO<T> getInicio(){
+		return this.inicio;
+	}
+	
 	public boolean vazia() {
 		return this.inicio == null;
 	}
@@ -26,6 +30,7 @@ public class ListaDuplamenteEncadeada<T> {
 		
 		return elemento;
 	}
+	
 	
 	public void adicionaInicio( T dado) {
 		NO<T> novo = new NO<T>(dado);
