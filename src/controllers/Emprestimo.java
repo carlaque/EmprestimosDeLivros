@@ -40,10 +40,11 @@ public class Emprestimo {
 				this.dataLimite = c.getTime();
 				leitor.setEmprestimo();
 				return true;
+			}else if (!leitor.verificarDisponibilidadeEmprestimo()) {
+				System.out.println("leitor do codigo "+ leitor.getCodigo()+" esta indisponivel para emprestimo, \nporque atingiu seu limite de emprestimos.");
+				return false;
 			}else {
-				System.out.println(livro.emprestarPara(leitor));
-				System.out.println(leitor.verificarDisponibilidadeEmprestimo());
-				System.out.println("leitor do codigo "+ leitor.getCodigo()+" esta indisponivel para emprestimo, \nporque ou atingiu seu limite de emprestimos ou \nnao lhe é permitido a retirada desse livro");
+				System.out.println("leitor do codigo "+ leitor.getCodigo()+" esta indisponivel para emprestimo, \nporque nao tem permissao para retirada desse livro.");
 				return false;
 			}
 		}else if( leitor == null)

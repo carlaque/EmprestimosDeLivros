@@ -23,16 +23,15 @@ public class Principal {
 		String[] nomes = {"francisco", "bernado", "clarice", "guilherme", "marilia"};
 		
 //		for(int i =0;i < 5; i ++) {
-//			Aluno a = new Aluno();
-//			a.cadastrar(alunos.getProximoCodigo(), nomes[i], "rua xxx", "123456789", "todos", "email@email.com", "1234564879", 0);
-//			alunos.insereCadastro(a);
-//		}
-//		
+//			Professor a = new Professor();
+//			a.cadastrar(professores.getProximoCodigo(), nomes[i], "rua xxx", "email@email.com", "123456789", "todos", "1234564879", 0);
+//			professores.insereCadastro(a);
+//		}		
 		
-//		Emprestimo novo = new Emprestimo();
-//		if(novo.Emprestar(emprestimos.getProximoCodigo(), livros.buscaPeloCodigo(1), alunos.buscaPeloCodigo(1)))
-//			emprestimos.insereCadastro(novo);
-//		
+		Emprestimo novo = new Emprestimo();
+		if(novo.Emprestar(emprestimos.getProximoCodigo(), livros.buscaPeloCodigo(1), alunos.buscaPeloCodigo(1)))
+			emprestimos.insereCadastro(novo);
+
 		
 		emprestimos.salvarLista();
 		livros.salvarLista();

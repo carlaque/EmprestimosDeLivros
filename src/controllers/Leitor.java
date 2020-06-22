@@ -44,20 +44,21 @@ public abstract class Leitor{
 	
 	public Leitor(){ }
 	
-	public void cadastrar(int codigo, String nome, String endereco, 
-			String telefone,  String categoria, String email, 
+	
+	
+		
+	public void cadastrar(int codigo, String nome, String endereco, String email, String telefone, String categoria,
 			String documento, int emprestimosCorrentes) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.endereco = endereco;
-		this.telefone = telefone;
 		this.email = email;
+		this.telefone = telefone;
 		this.categoria = categoria;
 		this.emprestimosCorrentes = emprestimosCorrentes;
 		setDocumento(documento);
 	}
-	
-		
+
 	public void Editar() {
 		// isso fica aqui mesmo???	
 	}

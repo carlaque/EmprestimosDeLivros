@@ -73,6 +73,7 @@ public class Emprestimos implements IGerenciadorArquivos {
 		File arq = new File(path, nome);
 		FileWriter writer= new FileWriter(arq, true);
 		PrintWriter print = new PrintWriter(writer);
+		System.out.println(lista.mostrarElementos());
 		
 		while(!lista.vazia()) {
 			Emprestimo a = (Emprestimo) lista.removeDoInicio();

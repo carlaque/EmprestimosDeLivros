@@ -43,16 +43,13 @@ public class Alunos implements IGerenciadorArquivos {
 				String[] aux = linha.split(";");
 				if(!aux[0].equals("codigo")) {
 					Aluno aluno = new Aluno();
-					aluno.cadastrar(
-							Integer.parseInt(aux[0]), 
+					aluno.cadastrar(Integer.parseInt(aux[0]), 
 							aux[1], aux[2], aux[3], 
-							aux[4], aux[5], aux[6], 
-							Integer.parseInt(aux[7]));
+							aux[4], aux[5], aux[6], Integer.parseInt(aux[7]));
 					lista.adicionaFinal(aluno);
 				}
 				linha = buffer.readLine();
 			}
-			System.out.println(lista.mostrarElementos());
 			buffer.close();
 			leitor.close();
 			fluxo.close();
