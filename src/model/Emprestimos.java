@@ -53,7 +53,7 @@ public class Emprestimos implements IGerenciadorArquivos {
 						le = professores.buscaPeloCodigo(Integer.parseInt(aux[3]));
 					}
 					Livro li = livros.buscaPeloCodigo(Integer.parseInt(aux[4]));
-					emprestimo.Emprestar(li, le );
+					emprestimo.Emprestar(Integer.parseInt(aux[0]),li, le );
 					lista.adicionaFinal(emprestimo);
 				}
 				linha = buffer.readLine();
@@ -75,7 +75,6 @@ public class Emprestimos implements IGerenciadorArquivos {
 		PrintWriter print = new PrintWriter(writer);
 		
 		while(!lista.vazia()) {
-			System.out.println(lista.mostrarElementos());
 			Emprestimo a = (Emprestimo) lista.removeDoInicio();
 			String conteudo = a.getCodigo() + ";"
 					+ a.getDataEmprestimo() + ";"
@@ -170,8 +169,15 @@ public class Emprestimos implements IGerenciadorArquivos {
 	}
 
 	public Emprestimo buscaPeloCodigo(int codigo) {
-		int pos = getPosicaoDoCodigo(codigo);
-		return lista.buscaNaPosicao(lista.getInicio(), pos).getDado();
+		int pos = getPosicaoDoCodigo(codigo) ;
+		return lista.buscaNaPosicao(lista.getInicio(), pos+ 1).getDado();
+	}
+
+	public int getProximoCodigo() {
+		if(lista.vazia()) 
+			return 0;
+		else
+			return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo() + 1;
 	}
 
 }

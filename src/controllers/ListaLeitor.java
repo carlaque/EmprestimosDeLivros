@@ -4,7 +4,7 @@ public class ListaLeitor extends ListaDuplamenteEncadeada<Leitor>{
 
 	@Override
 	protected String paraString(Leitor valor) {
-		return "nome: " + valor.getNome() ;
+		return "nome: " + valor.getNome() + " categoria: " + valor.getCategoria() ;
 	}
 
 }

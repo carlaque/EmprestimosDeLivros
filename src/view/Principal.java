@@ -20,19 +20,20 @@ public class Principal {
 		Emprestimos emprestimos = new Emprestimos(livros, alunos, professores);
 		Devolucoes devolucoes = new Devolucoes(emprestimos);
 		
+		String[] nomes = {"francisco", "bernado", "clarice", "guilherme", "marilia"};
 		
-//			Livro l = new Livro();
-//			l.cadastrar(1, "harry potter", "JK rowling", "123456789", "todos", 5);
-//			
-//			livros.insereCadastro(l);
-//			
-//			livros.salvarLista();
-			
-		
-		Emprestimo novo = new Emprestimo();
-		novo.Emprestar(livros.buscaPeloCodigo(1), alunos.buscaPeloCodigo(2));;
-		emprestimos.insereCadastro(novo);
+//		for(int i =0;i < 5; i ++) {
+//			Aluno a = new Aluno();
+//			a.cadastrar(alunos.getProximoCodigo(), nomes[i], "rua xxx", "123456789", "todos", "email@email.com", "1234564879", 0);
+//			alunos.insereCadastro(a);
+//		}
 //		
+		
+//		Emprestimo novo = new Emprestimo();
+//		if(novo.Emprestar(emprestimos.getProximoCodigo(), livros.buscaPeloCodigo(1), alunos.buscaPeloCodigo(1)))
+//			emprestimos.insereCadastro(novo);
+//		
+		
 		emprestimos.salvarLista();
 		livros.salvarLista();
 		professores.salvarLista();

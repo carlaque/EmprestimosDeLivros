@@ -1,6 +1,5 @@
 package controllers;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,25 +24,33 @@ public class Emprestimo {
 
 	public boolean estaRenovacao() { return renovacao; }
 
-	public void Emprestar(Livro livro, Leitor leitor) {
-		if(leitor.verificarDisponibilidadeEmprestimo()) {
-			SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy"); 
-			Date data = new Date();
-			Calendar c = Calendar.getInstance();
-			c.setTime( data );
-			c.add( Calendar.DAY_OF_MONTH , 14 );
-			this.codigo = 0;
-			this.categoria = leitor.getCategoria();
-			this.leitor  = leitor;
-			this.livro = livro;
-			this.categoria = leitor.getCategoria();
-			this.dataEmprestimo = data ;
-			this.dataLimite = c.getTime();
-			livro.emprestar();
-			leitor.setEmprestimo();
-		}else {
-			System.out.println("leitor indisponivel para emprestimo");
-		}
+	public boolean Emprestar(int codigo, Livro livro, Leitor leitor) {
+		if(livro != null && leitor != null ) {
+			if(leitor.verificarDisponibilidadeEmprestimo() && livro.emprestarPara(leitor)) {
+				Date data = new Date();
+				Calendar c = Calendar.getInstance();
+				c.setTime( data );
+				c.add( Calendar.DAY_OF_MONTH , 14 );
+				
+				this.codigo = codigo;
+				this.leitor  = leitor;
+				this.livro = livro;
+				this.categoria = leitor.getCategoria();
+				this.dataEmprestimo = data ;
+				this.dataLimite = c.getTime();
+				leitor.setEmprestimo();
+				return true;
+			}else {
+				System.out.println(livro.emprestarPara(leitor));
+				System.out.println(leitor.verificarDisponibilidadeEmprestimo());
+				System.out.println("leitor do codigo "+ leitor.getCodigo()+" esta indisponivel para emprestimo, \nporque ou atingiu seu limite de emprestimos ou \nnao lhe é permitido a retirada desse livro");
+				return false;
+			}
+		}else if( leitor == null)
+			System.out.println("Codigo de leitor invalido");
+		else 
+			System.out.println("Codigo de livro invalido");
+		return false;
 	}
 	
 	public void renovarEmprestimo() {
@@ -61,6 +68,7 @@ public class Emprestimo {
 		Date data = new Date();
 		devolucao.Devolver(this, data);
 		this.livro.devolver();
+		this.leitor.setDevolucao();
 	}
 
 	public String getCategoria() {

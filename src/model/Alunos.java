@@ -41,14 +41,18 @@ public class Alunos implements IGerenciadorArquivos {
 			String linha = buffer.readLine();			
 			while(linha != null) {
 				String[] aux = linha.split(";");
-				System.out.println(aux[0]);
 				if(!aux[0].equals("codigo")) {
 					Aluno aluno = new Aluno();
-					aluno.cadastrar(Integer.parseInt(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5], aux[6], Integer.parseInt(aux[7]));
+					aluno.cadastrar(
+							Integer.parseInt(aux[0]), 
+							aux[1], aux[2], aux[3], 
+							aux[4], aux[5], aux[6], 
+							Integer.parseInt(aux[7]));
 					lista.adicionaFinal(aluno);
 				}
 				linha = buffer.readLine();
 			}
+			System.out.println(lista.mostrarElementos());
 			buffer.close();
 			leitor.close();
 			fluxo.close();
@@ -147,6 +151,11 @@ public class Alunos implements IGerenciadorArquivos {
 	
 	@SuppressWarnings("unchecked")
 	public <T> int getPosicaoDoCodigo(int codigo) {
+		if(lista.vazia()) {
+			System.out.println("Nao há alunos cadastrados");
+			return -1;
+		}
+		
 		NO<T> aux = (NO<T>) lista.getInicio();
 		int pos = -1;
 		boolean percorre = true;
@@ -161,13 +170,16 @@ public class Alunos implements IGerenciadorArquivos {
 	}
 	
 	public Leitor buscaPeloCodigo(int codigo) {
-		int pos = getPosicaoDoCodigo(codigo);
-		if(pos > -1) return lista.buscaNaPosicao(lista.getInicio(), pos).getDado();
-		else {
-			new IOException("Codigo de Leitor invalido.");
-			return null;
-		}
+		int pos = getPosicaoDoCodigo(codigo)  ;
+		if(pos > -1) return lista.buscaNaPosicao(lista.getInicio(), pos+ 1).getDado();
+		return null;
 	}
-
+	
+	public int getProximoCodigo() {
+		if(lista.vazia()) 
+			return 0;
+		else
+			return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo() + 1;
+	}
 
 }

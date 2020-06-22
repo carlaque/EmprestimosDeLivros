@@ -8,6 +8,7 @@ public class Devolucao {
 	private Date dataDevolucao;
 	
 	public void Devolver(Emprestimo emprestimo, Date data) {
+		emprestimo.devolverLivro();
 		this.emprestimo = emprestimo;
 		this.dataDevolucao = data;
 	}

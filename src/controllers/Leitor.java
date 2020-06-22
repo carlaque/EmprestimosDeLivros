@@ -1,7 +1,5 @@
 package controllers;
 
-import java.util.Date;
-
 
 public abstract class Leitor{
 	
@@ -41,13 +39,14 @@ public abstract class Leitor{
 		this.emprestimosCorrentes++;
 	}
 	
-	protected abstract void setDocumento(String documento);
-	public abstract boolean verificarDisponibilidadeRenovacao(Date dataEmprestimo);	
+	protected abstract void setDocumento(String documento);	
 	public abstract boolean verificarDisponibilidadeEmprestimo();
 	
 	public Leitor(){ }
 	
-	public void cadastrar(int codigo, String nome, String endereco, String telefone,  String categoria, String email, String documento, int emprestimosCorrentes) {
+	public void cadastrar(int codigo, String nome, String endereco, 
+			String telefone,  String categoria, String email, 
+			String documento, int emprestimosCorrentes) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.endereco = endereco;
@@ -55,7 +54,7 @@ public abstract class Leitor{
 		this.email = email;
 		this.categoria = categoria;
 		this.emprestimosCorrentes = emprestimosCorrentes;
-		this.setDocumento(documento);
+		setDocumento(documento);
 	}
 	
 		
@@ -66,5 +65,9 @@ public abstract class Leitor{
 	public void Consultar() {
 		
 	}
+
+	protected void setDevolucao() {
+		this.emprestimosCorrentes++;
+	};
 	
 }

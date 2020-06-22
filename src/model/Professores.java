@@ -33,6 +33,7 @@ public class Professores implements IGerenciadorArquivos {
 		File arq = new File(path, nome);
 		this.lista = new ListaLeitor();
 		
+		
 		if(arq.exists()) {
 			FileInputStream fluxo = new FileInputStream(arq);
 			InputStreamReader leitor = new InputStreamReader(fluxo);
@@ -134,7 +135,7 @@ public class Professores implements IGerenciadorArquivos {
 	public void limparArquivo() throws IOException {
 		File arq = new File(path, nome );
 		
-		if( arq.delete() ) System.out.println("Arquivo Deletado Com sucesso");
+		arq.delete();
 		arq = new File(path, nome );
 		FileWriter writer= new FileWriter(arq, true);
 		PrintWriter print = new PrintWriter(writer);
@@ -161,8 +162,15 @@ public class Professores implements IGerenciadorArquivos {
 	}
 	
 	public Leitor buscaPeloCodigo(int codigo) {
-		int pos = getPosicaoDoCodigo(codigo);
-		return lista.buscaNaPosicao(lista.getInicio(), pos).getDado();
+		int pos = getPosicaoDoCodigo(codigo) ;
+		return lista.buscaNaPosicao(lista.getInicio(), pos + 1).getDado();
+	}
+	
+	public int getProximoCodigo() {
+		if(lista.vazia()) 
+			return 0;
+		else
+			return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo() + 1;
 	}
 
 }

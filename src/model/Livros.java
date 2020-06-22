@@ -83,7 +83,7 @@ public class Livros implements IGerenciadorArquivos {
 	public void limparArquivo() throws IOException {
 		File arq = new File(path, nome );
 		
-		if( arq.delete() ) System.out.println("Arquivo Deletado Com sucesso");
+		arq.delete();
 		arq = new File(path, nome );
 		FileWriter writer= new FileWriter(arq, true);
 		PrintWriter print = new PrintWriter(writer);
@@ -144,7 +144,7 @@ public class Livros implements IGerenciadorArquivos {
 		NO<T> aux = (NO<T>) lista.getInicio();
 		int pos = -1;
 		boolean percorre = true;
-		while(aux.getProximo() != null && percorre) {
+		while(aux != null && percorre) {
 			Livro l = (Livro) aux.getDado();
 			if(l.getCodigo() == codigo) percorre = false;
 			aux = aux.getProximo();
@@ -155,7 +155,18 @@ public class Livros implements IGerenciadorArquivos {
 	}
 
 	public Livro buscaPeloCodigo(int codigo) {
-		int pos = getPosicaoDoCodigo(codigo);
-		return lista.buscaNaPosicao(lista.getInicio(), pos).getDado();
+		int pos = getPosicaoDoCodigo(codigo) + 1;
+		if(pos > -1)
+			return lista.buscaNaPosicao(lista.getInicio(), pos).getDado();
+		else
+			return null;
 	}
+	
+	public int getProximoCodigo() {
+		if(lista.vazia()) 
+			return 0;
+		else
+			return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo() + 1;
+	}
+	
 }

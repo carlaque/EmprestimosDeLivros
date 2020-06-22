@@ -22,8 +22,13 @@ public class Livro {
 		return codigo;
 	}
 	
-	public void emprestar() { 
-		this.quantidade--;
+	public boolean emprestarPara(Leitor leitor) { 
+		
+		if(leitor.getCategoria().equals(this.categoria)) {
+			this.quantidade--;
+			return true;
+		}
+		return false;
 	}
 	public void devolver() { 
 		this.quantidade++;

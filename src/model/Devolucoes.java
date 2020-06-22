@@ -158,7 +158,10 @@ public class Devolucoes implements IGerenciadorArquivos {
 		
 		return pos;
 	}
-
+	
+	public int getProximoCodigo() {
+		return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo();
+	}
 
 }
 
