@@ -25,7 +25,7 @@ public class Aluno extends Leitor  {
 
 	@Override
 	public boolean verificarDisponibilidadeEmprestimo() {
-		if(this.emprestimosCorrentes  < 3) return true;
+		if(this.emprestimosCorrentes  <= 3) return true;
 		return false;
 	}
 	

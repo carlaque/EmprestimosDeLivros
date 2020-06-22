@@ -88,7 +88,7 @@ public class Devolucoes implements IGerenciadorArquivos {
 	public void limparArquivo() throws IOException {
 		File arq = new File(path, nome );
 		
-		if( arq.delete() ) System.out.println("Arquivo Deletado Com sucesso");
+		arq.delete();
 		arq = new File(path, nome );
 		FileWriter writer= new FileWriter(arq, true);
 		PrintWriter print = new PrintWriter(writer);

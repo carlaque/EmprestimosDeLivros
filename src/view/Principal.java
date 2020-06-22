@@ -21,19 +21,24 @@ public class Principal {
 		Devolucoes devolucoes = new Devolucoes(emprestimos);
 		
 		
-			Livro l = new Livro();
-			l.cadastrar(1, "harry potter", "JK rowling", "123456789", "todos", 5);
-			
-			livros.insereCadastro(l);
-			
-			livros.salvarLista();
+//			Livro l = new Livro();
+//			l.cadastrar(1, "harry potter", "JK rowling", "123456789", "todos", 5);
+//			
+//			livros.insereCadastro(l);
+//			
+//			livros.salvarLista();
 			
 		
 		Emprestimo novo = new Emprestimo();
-		novo.Emprestar(l, alunos.buscaPeloCodigo(2));;
-		emprestimos.insereCadastro( novo);
+		novo.Emprestar(livros.buscaPeloCodigo(1), alunos.buscaPeloCodigo(2));;
+		emprestimos.insereCadastro(novo);
 //		
 		emprestimos.salvarLista();
+		livros.salvarLista();
+		professores.salvarLista();
+		alunos.salvarLista();
+		devolucoes.salvarLista();
+		
 	}
 
 }

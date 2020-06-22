@@ -1,2 +1,2 @@
 codigo; dataEmprestimo; dataLimite; codigo_leitor; codigo_livro; categoria; renovacao;
-0;null;null;2;1
+0;Sun Jun 21 22:46:38 BRT 2020;Sun Jul 05 22:46:38 BRT 2020;1;1;aluno;false

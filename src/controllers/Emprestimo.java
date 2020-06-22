@@ -32,7 +32,6 @@ public class Emprestimo {
 			Calendar c = Calendar.getInstance();
 			c.setTime( data );
 			c.add( Calendar.DAY_OF_MONTH , 14 );
-			System.out.println( c.getTime() );
 			this.codigo = 0;
 			this.categoria = leitor.getCategoria();
 			this.leitor  = leitor;
@@ -51,7 +50,7 @@ public class Emprestimo {
 		if(!this.renovacao) { // TODO verificar a questao do leitor 
 			Calendar c = Calendar.getInstance();
 	        c.setTime(this.dataLimite);
-	        c.add(Calendar.DATE, 1);
+	        c.add(Calendar.DATE, 14);
 	        this.dataLimite = c.getTime();
 			this.renovacao = true;
 		}
@@ -61,6 +60,7 @@ public class Emprestimo {
 		Devolucao devolucao = new Devolucao();
 		Date data = new Date();
 		devolucao.Devolver(this, data);
+		this.livro.devolver();
 	}
 
 	public String getCategoria() {

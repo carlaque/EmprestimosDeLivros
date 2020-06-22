@@ -33,6 +33,7 @@ public class Emprestimos implements IGerenciadorArquivos {
 	@Override
 	public void carregarLista() throws IOException {
 		File arq = new File(path, nome);
+		
 		this.lista = new ListaEmprestimo();
 		
 		if(arq.exists()) {
@@ -46,7 +47,7 @@ public class Emprestimos implements IGerenciadorArquivos {
 				if(!aux[0].equals("codigo")) {
 					Emprestimo emprestimo = new Emprestimo();
 					Leitor le;
-					if(aux[5].equals("aluno")) {
+					if(aux[5].equals("todos")) { 
 						le = alunos.buscaPeloCodigo(Integer.parseInt(aux[3]));
 					}else {
 						le = professores.buscaPeloCodigo(Integer.parseInt(aux[3]));
@@ -74,12 +75,15 @@ public class Emprestimos implements IGerenciadorArquivos {
 		PrintWriter print = new PrintWriter(writer);
 		
 		while(!lista.vazia()) {
+			System.out.println(lista.mostrarElementos());
 			Emprestimo a = (Emprestimo) lista.removeDoInicio();
 			String conteudo = a.getCodigo() + ";"
 					+ a.getDataEmprestimo() + ";"
 					+ a.getDataLimite() + ";"
 					+ a.getLeitor().getCodigo() + ";"
-					+ a.getLivro().getCodigo() + "\n";
+					+ a.getLivro().getCodigo() + ";"
+					+ a.getLeitor().getCategoria() + ";"
+					+ a.estaRenovacao() + "\n";
 			
 			print.write(conteudo);
 		}
