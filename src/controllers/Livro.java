@@ -1,6 +1,7 @@
 package controllers;
 
 public class Livro {
+	private int codigo;
 	private String titulo;
 	private String autor;
 	private String ISBN;
@@ -17,6 +18,10 @@ public class Livro {
 
 	public int getQuantidade() { return quantidade;	}
 	
+	public int getCodigo() {
+		return codigo;
+	}
+	
 	public void emprestar() { 
 		this.quantidade--;
 	}
@@ -24,7 +29,8 @@ public class Livro {
 		this.quantidade++;
 	}
 	
-	public void cadatrar(String titulo, String autor, String iSBN, String categoria, int quantidade) {
+	public void cadastrar(int codigo,String titulo, String autor, String iSBN, String categoria, int quantidade) {
+		this.codigo = codigo;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.ISBN = iSBN;
@@ -49,4 +55,5 @@ public class Livro {
 		
 	}
 
+	
 }

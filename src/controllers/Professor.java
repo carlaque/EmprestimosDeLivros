@@ -5,6 +5,10 @@ import java.util.Date;
 public class Professor extends Leitor{
 	private String cpf;
 	
+	public Professor(){
+		this.categoria = "professor";
+	}
+	
 	public String getCpf() {
 		return cpf;
 	}

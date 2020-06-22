@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.Date;
 
-import model.Alunos;
 
 public abstract class Leitor{
 	
@@ -11,9 +10,12 @@ public abstract class Leitor{
 	protected String endereco;
 	protected String email;
 	protected String telefone;
+	protected String categoria;
 	protected int emprestimosCorrentes;
 
 	public int getCodigo() { return codigo; }
+	
+	public String getCategoria() { return categoria; }
 	
 	public String getNome() { return nome; }
 	
@@ -45,12 +47,13 @@ public abstract class Leitor{
 	
 	public Leitor(){ }
 	
-	public void cadastrar(int codigo, String nome, String endereco, String telefone, String email, String documento, int emprestimosCorrentes) {
+	public void cadastrar(int codigo, String nome, String endereco, String telefone,  String categoria, String email, String documento, int emprestimosCorrentes) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.email = email;
+		this.categoria = categoria;
 		this.emprestimosCorrentes = emprestimosCorrentes;
 		this.setDocumento(documento);
 	}

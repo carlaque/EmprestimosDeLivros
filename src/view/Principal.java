@@ -3,29 +3,37 @@ package view;
 import java.io.IOException;
 
 import controllers.Aluno;
+import controllers.Emprestimo;
+import controllers.Livro;
 import controllers.Professor;
 import model.Alunos;
+import model.Devolucoes;
+import model.Emprestimos;
+import model.Livros;
 import model.Professores;
 
 public class Principal {
 	public static void main(String[] args) throws IOException {
-		Alunos a = new Alunos();
-		Professores p = new Professores();
-		p.carregarLista();
-		a.carregarLista();
+		Livros livros = new Livros();
+		Alunos alunos = new Alunos();
+		Professores professores = new Professores();
+		Emprestimos emprestimos = new Emprestimos(livros, alunos, professores);
+		Devolucoes devolucoes = new Devolucoes(emprestimos);
 		
 		
-//		for(int i =0;i < 5; i ++) {
-//			Aluno al = new Aluno();
-//			al.cadastrar(i, "b", "b", "b", "b", "b", 2);
-//			a.insereCadastro(al);
-//		}
+			Livro l = new Livro();
+			l.cadastrar(1, "harry potter", "JK rowling", "123456789", "todos", 5);
+			
+			livros.insereCadastro(l);
+			
+			livros.salvarLista();
+			
 		
-//		Aluno novo = new Aluno();
-//		novo.cadastrar(2, "asdfasfdsgdsh", "b", "b", "b", "b", 2);
-//		a.editarCadastro(2, novo);
+		Emprestimo novo = new Emprestimo();
+		novo.Emprestar(l, alunos.buscaPeloCodigo(2));;
+		emprestimos.insereCadastro( novo);
 //		
-		a.salvarLista();
+		emprestimos.salvarLista();
 	}
 
 }

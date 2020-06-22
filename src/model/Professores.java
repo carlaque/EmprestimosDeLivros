@@ -10,13 +10,23 @@ import java.io.PrintWriter;
 
 import controllers.Leitor;
 import controllers.ListaLeitor;
+import controllers.NO;
 import controllers.Professor;
 
 public class Professores implements IGerenciadorArquivos {
 	private final String nome =  "professores.csv";
 	private final String path =  "./";
-	private String cabecalho = "codigo; nome; endereco; email; telefone; CPF; emprestimos correntes\n";
+	private String cabecalho = "codigo; nome; endereco; email; telefone; categoria; CPF; emprestimos correntes\n";
 	private ListaLeitor lista;
+	
+	public Professores() throws IOException {
+		carregarLista();
+	}
+	
+	public ListaLeitor getLista(){
+		return this.lista;
+	}
+	
 	
 	@Override
 	public void carregarLista() throws IOException {
@@ -33,7 +43,7 @@ public class Professores implements IGerenciadorArquivos {
 				String[] aux = linha.split(";");
 				if(!aux[0].equals("codigo")) {
 					Professor professor = new Professor();
-					professor.cadastrar(Integer.parseInt(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5], Integer.parseInt(aux[6]));
+					professor.cadastrar(Integer.parseInt(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5], aux[6], Integer.parseInt(aux[7]));
 					lista.adicionaFinal(professor);
 				}
 				linha = buffer.readLine();
@@ -60,6 +70,7 @@ public class Professores implements IGerenciadorArquivos {
 					+ a.getEndereco() + ";"
 					+ a.getEmail() + ";"
 					+ a.getTelefone() + ";"
+					+ a.getCategoria() + ";"
 					+ a.getCpf() + ";"
 					+ a.getEmprestimosCorrentes() + "\n";
 			
@@ -99,21 +110,59 @@ public class Professores implements IGerenciadorArquivos {
 		lista.adicionaFinal((Leitor) dados);	
 	}
 
-	@Override
-	public <T> void editarCadastro(T antigo, T novo) throws IOException {
-		int posicao = lista.buscarPosicaoElemento((Leitor) antigo);
-		lista.removeDaPosicao(posicao);
-		lista.adicionaNaPosicao((Leitor) novo, posicao);
-	}
-
-
-	@Override
-	public <T> void excluirCadastro(T dados) throws IOException {
-		int posicao = lista.buscarPosicaoElemento((Leitor) dados);
-		lista.removeDaPosicao(posicao);
-		
-	}
-
 	
+	
+
+	@Override
+	public <T> void editarCadastro(int codigo, T dadosNovos) throws IOException {
+		int posicao = getPosicaoDoCodigo(codigo);
+		if(posicao > -1) {
+			lista.removeDaPosicao(posicao+1);
+			lista.adicionaNaPosicao((Leitor) dadosNovos, posicao);
+		}
+		else System.out.println("codigo invalido");
+	}
+
+	@Override
+	public <T> void excluirCadastro(int codigo) throws IOException {
+		int posicao = getPosicaoDoCodigo(codigo);
+		if(posicao > -1)lista.removeDaPosicao(posicao+1);
+		else System.out.println("codigo invalido");
+	}
+	
+	@Override
+	public void limparArquivo() throws IOException {
+		File arq = new File(path, nome );
+		
+		if( arq.delete() ) System.out.println("Arquivo Deletado Com sucesso");
+		arq = new File(path, nome );
+		FileWriter writer= new FileWriter(arq, true);
+		PrintWriter print = new PrintWriter(writer);
+		print.write(cabecalho);
+		print.flush();
+		print.close();
+		writer.close();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> int getPosicaoDoCodigo(int codigo) {
+		NO<T> aux = (NO<T>) lista.getInicio();
+		int pos = -1;
+		boolean percorre = true;
+		while(aux.getProximo() != null && percorre) {
+			Leitor l = (Leitor) aux.getDado();
+			if(l.getCodigo() == codigo) percorre = false;
+			aux = aux.getProximo();
+			pos++;
+		}
+		
+		return pos;
+	}
+	
+	public Leitor buscaPeloCodigo(int codigo) {
+		int pos = getPosicaoDoCodigo(codigo);
+		return lista.buscaNaPosicao(lista.getInicio(), pos).getDado();
+	}
 
 }

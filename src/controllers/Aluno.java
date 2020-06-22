@@ -5,6 +5,10 @@ import java.util.Date;
 public class Aluno extends Leitor  {
 	private String RA;
 	
+	public Aluno(){
+		this.categoria = "aluno";
+	}
+	
 	public String getRA() {
 		return this.RA;
 	}

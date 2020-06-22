@@ -10,5 +10,6 @@ public interface IGerenciadorArquivos {
 	public <T> void excluirCadastro(int codigo) throws IOException;
 	public void carregarLista() throws IOException;
 	public void salvarLista() throws IOException;
+	public <T> int getPosicaoDoCodigo(int codigo);
 	
 }

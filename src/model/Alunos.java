@@ -16,8 +16,17 @@ import controllers.NO;
 public class Alunos implements IGerenciadorArquivos {
 	private final String nome =  "alunos.csv";
 	private final String path =  "./";
-	private String cabecalho = "codigo; nome; endereco; email; telefone; RA; Emprestimos Correntes;\n";
+	private String cabecalho = "codigo; nome; endereco; email; telefone;categoria; RA; Emprestimos Correntes;\n";
 	private ListaLeitor lista;
+	
+	public Alunos() throws IOException {
+		carregarLista();
+	}
+	
+	public ListaLeitor getLista(){
+		return this.lista;
+	}
+	
 	
 	@Override
 	public void carregarLista() throws IOException {
@@ -34,7 +43,7 @@ public class Alunos implements IGerenciadorArquivos {
 				String[] aux = linha.split(";");
 				if(!aux[0].equals("codigo")) {
 					Aluno aluno = new Aluno();
-					aluno.cadastrar(Integer.parseInt(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5], Integer.parseInt(aux[6]));
+					aluno.cadastrar(Integer.parseInt(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5], aux[6], Integer.parseInt(aux[7]));
 					lista.adicionaFinal(aluno);
 				}
 				linha = buffer.readLine();
@@ -62,6 +71,7 @@ public class Alunos implements IGerenciadorArquivos {
 					+ a.getEndereco() + ";"
 					+ a.getEmail() + ";"
 					+ a.getTelefone() + ";"
+					+ a.getCategoria() + ";"
 					+ a.getRA() + ";"
 					+ a.getEmprestimosCorrentes() + "\n";
 			
@@ -78,7 +88,7 @@ public class Alunos implements IGerenciadorArquivos {
 	public void limparArquivo() throws IOException {
 		File arq = new File(path, nome );
 		
-		if( arq.delete() ) System.out.println("Arquivo Deletado Com sucesso");
+		arq.delete() ;
 		arq = new File(path, nome );
 		FileWriter writer= new FileWriter(arq, true);
 		PrintWriter print = new PrintWriter(writer);
@@ -86,9 +96,7 @@ public class Alunos implements IGerenciadorArquivos {
 		print.flush();
 		print.close();
 		writer.close();
-	
-		
-		
+
 	}
 
 	@Override
@@ -149,6 +157,11 @@ public class Alunos implements IGerenciadorArquivos {
 		}
 		
 		return pos;
+	}
+	
+	public Leitor buscaPeloCodigo(int codigo) {
+		int pos = getPosicaoDoCodigo(codigo);
+		return lista.buscaNaPosicao(lista.getInicio(), pos).getDado();
 	}
 
 
