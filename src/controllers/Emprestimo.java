@@ -11,6 +11,7 @@ public class Emprestimo {
 	private Livro livro;
 	private String categoria;
 	private boolean renovacao;
+	private Devolucao devolucao;
 	
 	public int getCodigo() { return codigo; }
 	
@@ -21,6 +22,8 @@ public class Emprestimo {
 	public Leitor getLeitor() { return leitor; }
 
 	public Livro getLivro() { return livro; }
+	
+	public Devolucao getDevolucao() { return devolucao; }
 
 	public boolean estaRenovacao() { return renovacao; }
 
@@ -65,12 +68,28 @@ public class Emprestimo {
 	}
 	
 	public void devolverLivro() {
-		Devolucao devolucao = new Devolucao();
+		devolucao = new Devolucao();
 		Date data = new Date();
-		devolucao.Devolver(this, data);
+		devolucao.Devolver(data);
 		this.livro.devolver();
 		this.leitor.setDevolucao();
 	}
+	
+	
+	
+	public void carregarEmprestimo(int codigo, Date dataEmprestimo, Date dataLimite, Leitor leitor, Livro livro, String categoria,
+			boolean renovacao, Devolucao devolucao) {
+		this.codigo = codigo;
+		this.dataEmprestimo = dataEmprestimo;
+		this.dataLimite = dataLimite;
+		this.leitor = leitor;
+		this.livro = livro;
+		this.categoria = categoria;
+		this.renovacao = renovacao;
+		this.devolucao = devolucao;
+	}
+
+	
 
 	public String getCategoria() {
 		return categoria;

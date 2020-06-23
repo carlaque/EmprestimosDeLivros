@@ -17,8 +17,8 @@ public class Principal {
 		Livros livros = new Livros();
 		Alunos alunos = new Alunos();
 		Professores professores = new Professores();
-		Emprestimos emprestimos = new Emprestimos(livros, alunos, professores);
-		Devolucoes devolucoes = new Devolucoes(emprestimos);
+		Devolucoes devolucoes = new Devolucoes();
+		Emprestimos emprestimos = new Emprestimos(livros, alunos, professores, devolucoes);
 		
 		String[] nomes = {"francisco", "bernado", "clarice", "guilherme", "marilia"};
 		
@@ -29,8 +29,11 @@ public class Principal {
 //		}		
 		
 		Emprestimo novo = new Emprestimo();
-		if(novo.Emprestar(emprestimos.getProximoCodigo(), livros.buscaPeloCodigo(1), alunos.buscaPeloCodigo(1)))
+		if(novo.Emprestar(emprestimos.getProximoCodigo(), livros.buscaPeloCodigo(1), alunos.buscaPeloCodigo(2)))
 			emprestimos.insereCadastro(novo);
+		
+		novo.devolverLivro();
+		devolucoes.insereCadastro(novo.getDevolucao());
 
 		
 		emprestimos.salvarLista();

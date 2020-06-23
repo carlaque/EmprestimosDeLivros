@@ -4,18 +4,12 @@ import java.util.Date;
 
 public class Devolucao {
 	private int codigo;
-	private Emprestimo emprestimo;
 	private Date dataDevolucao;
 	
-	public void Devolver(Emprestimo emprestimo, Date data) {
-		emprestimo.devolverLivro();
-		this.emprestimo = emprestimo;
+	public void Devolver(Date data) {
 		this.dataDevolucao = data;
 	}
 	
-	public Emprestimo getEmprestimo() {
-		return emprestimo;
-	}
 
 	public Date getDataDevolucao() {
 		return dataDevolucao;
@@ -29,6 +23,12 @@ public class Devolucao {
 	public boolean devolveuNoPrazo() {
 		
 		return true;
+	}
+
+
+	public void carregarDevolucoes(int codigo, Date data) {
+		this.codigo = codigo;
+		this.dataDevolucao = data;
 	}
 
 	

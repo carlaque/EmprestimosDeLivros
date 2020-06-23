@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.util.Date;
 
 public interface IGerenciadorArquivos {
 	public void createFile() throws IOException;
@@ -11,5 +12,4 @@ public interface IGerenciadorArquivos {
 	public void carregarLista() throws IOException;
 	public void salvarLista() throws IOException;
 	public <T> int getPosicaoDoCodigo(int codigo);
-	
 }

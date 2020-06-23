@@ -7,11 +7,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import controllers.Devolucao;
+import controllers.Emprestimo;
 import controllers.ListaDevolucao;
 import controllers.NO;
 
@@ -20,10 +22,8 @@ public class Devolucoes implements IGerenciadorArquivos {
 	private final String path =  "./";
 	private String cabecalho = "codigo; codigo_emprestimo; data_devolucao\n";
 	private ListaDevolucao lista;
-	private Emprestimos emprestimos;
 	
-	public Devolucoes(Emprestimos emprestimos) throws IOException {
-		this.emprestimos = emprestimos;
+	public Devolucoes() throws IOException {
 		carregarLista();
 	}
 	
@@ -37,18 +37,14 @@ public class Devolucoes implements IGerenciadorArquivos {
 			InputStreamReader leitor = new InputStreamReader(fluxo);
 			BufferedReader buffer = new BufferedReader(leitor); 
 			
+			
 			String linha = buffer.readLine();			
 			while(linha != null) {
 				String[] aux = linha.split(";");
 				if(!aux[0].equals("codigo")) {
 					Devolucao dev = new Devolucao();
-					Date data = null ;
-					try {
-						data = new SimpleDateFormat("dd/MM/yyyy").parse(aux[2]);
-					} catch (ParseException e) {
-						e.printStackTrace();
-					} 
-					dev.Devolver(emprestimos.buscaPeloCodigo(Integer.parseInt(aux[1])), data); 
+					
+					dev.carregarDevolucoes(Integer.parseInt(aux[0]),getData(aux[1])); 
 					lista.adicionaFinal(dev);
 				}
 				linha = buffer.readLine();
@@ -69,11 +65,14 @@ public class Devolucoes implements IGerenciadorArquivos {
 		FileWriter writer= new FileWriter(arq, true);
 		PrintWriter print = new PrintWriter(writer);
 		
+		if(lista.vazia()) {
+			return ;
+		}
+		
 		while(!lista.vazia()) {
 			Devolucao a = (Devolucao) lista.removeDoInicio();
 			String conteudo = a.getCodigo() + ";"
-					+ a.getDataDevolucao() + ";"
-					+ a.getEmprestimo() + "\n";
+					+ a.getDataDevolucao() + "\n";
 			
 			print.write(conteudo);
 		}
@@ -159,8 +158,24 @@ public class Devolucoes implements IGerenciadorArquivos {
 		return pos;
 	}
 	
+	public Devolucao buscaPeloCodigo(int codigo) {
+		int pos = getPosicaoDoCodigo(codigo) ;
+		return lista.buscaNaPosicao(lista.getInicio(), pos+ 1).getDado();
+	}
+	
 	public int getProximoCodigo() {
 		return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo();
+	}
+
+	public Date getData(String data) {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+		Date date = null;
+		try {
+			date = formato.parse(data);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
 	}
 
 }

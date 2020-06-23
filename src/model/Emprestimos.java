@@ -7,7 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import controllers.Devolucao;
 import controllers.Emprestimo;
 import controllers.ListaEmprestimo;
 import controllers.Leitor;
@@ -17,16 +21,18 @@ import controllers.NO;
 public class Emprestimos implements IGerenciadorArquivos {
 	private final String nome =  "emprestimos.csv";
 	private final String path =  "./";
-	private String cabecalho = "codigo; dataEmprestimo; dataLimite; codigo_leitor; codigo_livro; categoria; renovacao;\n";
+	private String cabecalho = "codigo; dataEmprestimo; dataLimite; codigo_leitor; codigo_livro; categoria; renovacao;codigo_devolucao\n";
 	private ListaEmprestimo lista;
 	private Livros livros;
 	private Alunos alunos;
 	private Professores professores;
+	private Devolucoes devolucoes;
 	
-	public Emprestimos(Livros livros, Alunos alunos, Professores professores) throws IOException {
+	public Emprestimos(Livros livros, Alunos alunos, Professores professores, Devolucoes devolucoes) throws IOException {
 		this.livros = livros;
 		this.alunos = alunos;
 		this.professores = professores;
+		this.devolucoes = devolucoes;
 		carregarLista();
 	}
 	
@@ -53,7 +59,17 @@ public class Emprestimos implements IGerenciadorArquivos {
 						le = professores.buscaPeloCodigo(Integer.parseInt(aux[3]));
 					}
 					Livro li = livros.buscaPeloCodigo(Integer.parseInt(aux[4]));
-					emprestimo.Emprestar(Integer.parseInt(aux[0]),li, le );
+					
+					Devolucao devolucao = null;
+					if(aux.length == 7) {
+						System.out.println(aux);
+						devolucao = devolucoes.buscaPeloCodigo(Integer.parseInt(aux[7]));
+					}
+					
+					boolean renovacao = false;
+					if(aux[6].equals("true")) renovacao = true;
+					emprestimo.carregarEmprestimo(Integer.parseInt(aux[0]), getData(aux[1]), getData(aux[2]), le, li, aux[5],  renovacao, devolucao);
+					
 					lista.adicionaFinal(emprestimo);
 				}
 				linha = buffer.readLine();
@@ -73,13 +89,18 @@ public class Emprestimos implements IGerenciadorArquivos {
 		File arq = new File(path, nome);
 		FileWriter writer= new FileWriter(arq, true);
 		PrintWriter print = new PrintWriter(writer);
+		
+		if(lista.vazia()) {
+			return ;
+		}
+		
 		System.out.println(lista.mostrarElementos());
 		
 		while(!lista.vazia()) {
 			Emprestimo a = (Emprestimo) lista.removeDoInicio();
 			String conteudo = a.getCodigo() + ";"
-					+ a.getDataEmprestimo() + ";"
-					+ a.getDataLimite() + ";"
+					+ getDataString(a.getDataEmprestimo() )+ ";"
+					+ getDataString(a.getDataLimite() )+ ";"
 					+ a.getLeitor().getCodigo() + ";"
 					+ a.getLivro().getCodigo() + ";"
 					+ a.getLeitor().getCategoria() + ";"
@@ -179,6 +200,24 @@ public class Emprestimos implements IGerenciadorArquivos {
 			return 0;
 		else
 			return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo() + 1;
+	}
+
+	public Date getData(String data) {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+		Date date = null;
+		try {
+			date = formato.parse(data);
+			System.out.println(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
+	
+	public String getDataString(Date data) {
+		SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+		String dataFormatada = sd.format(data);
+		return dataFormatada;
 	}
 
 }

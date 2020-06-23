@@ -1,7 +1,7 @@
-codigo; nome; endereco; email; telefone;categoria; RA; Emprestimos Correntes
+codigo; nome; endereco; email; telefone;categoria; RA; Emprestimos Correntes;
 0;francisco;rua xxx;email@email.com;123456789;todos;1234564879;0
-1;bernado;rua xxx;email@email.com;123456789;todos;1234564879;3
-2;clarice;rua xxx;email@email.com;123456789;todos;1234564879;0
+1;bernado;rua xxx;email@email.com;123456789;todos;1234564879;0
+2;clarice;rua xxx;email@email.com;123456789;todos;1234564879;2
 3;guilherme;rua xxx;email@email.com;123456789;todos;1234564879;0
 4;marilia;rua xxx;email@email.com;123456789;todos;1234564879;0
 5;francisco;rua xxx;email@email.com;123456789;todos;1234564879;0
