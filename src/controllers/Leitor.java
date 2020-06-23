@@ -59,16 +59,8 @@ public abstract class Leitor{
 		setDocumento(documento);
 	}
 
-	public void Editar() {
-		// isso fica aqui mesmo???	
-	}
-	
-	public void Consultar() {
-		
-	}
-
 	protected void setDevolucao() {
-		this.emprestimosCorrentes++;
+		this.emprestimosCorrentes--;
 	};
 	
 }

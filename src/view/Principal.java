@@ -28,11 +28,14 @@ public class Principal {
 //			professores.insereCadastro(a);
 //		}		
 		
-		Emprestimo novo = new Emprestimo();
-		if(novo.Emprestar(emprestimos.getProximoCodigo(), livros.buscaPeloCodigo(1), alunos.buscaPeloCodigo(2)))
-			emprestimos.insereCadastro(novo);
+//		Emprestimo novo = new Emprestimo();
+//		if(novo.Emprestar(emprestimos.getProximoCodigo(), livros.buscaPeloCodigo(1), alunos.buscaPeloCodigo(4)))
+//			emprestimos.insereCadastro(novo);
+//		
 		
-		novo.devolverLivro();
+		//TODO: VERFICACAO SE EXISTE EMPRESTIMO ANTES DE DEVOLVER
+		Emprestimo novo = emprestimos.buscaPeloCodigo(4);
+		novo.devolverLivro(devolucoes.getProximoCodigo());
 		devolucoes.insereCadastro(novo.getDevolucao());
 
 		

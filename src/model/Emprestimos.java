@@ -62,7 +62,6 @@ public class Emprestimos implements IGerenciadorArquivos {
 					
 					Devolucao devolucao = null;
 					if(aux.length == 7) {
-						System.out.println(aux);
 						devolucao = devolucoes.buscaPeloCodigo(Integer.parseInt(aux[7]));
 					}
 					
@@ -94,8 +93,6 @@ public class Emprestimos implements IGerenciadorArquivos {
 			return ;
 		}
 		
-		System.out.println(lista.mostrarElementos());
-		
 		while(!lista.vazia()) {
 			Emprestimo a = (Emprestimo) lista.removeDoInicio();
 			String conteudo = a.getCodigo() + ";"
@@ -104,7 +101,11 @@ public class Emprestimos implements IGerenciadorArquivos {
 					+ a.getLeitor().getCodigo() + ";"
 					+ a.getLivro().getCodigo() + ";"
 					+ a.getLeitor().getCategoria() + ";"
-					+ a.estaRenovacao() + "\n";
+					+ a.estaRenovacao() + ";" ;
+			
+			if(a.getDevolucao() != null) 
+				conteudo += a.getDevolucao().getCodigo() + "\n";
+			else conteudo += "\n"; 
 			
 			print.write(conteudo);
 		}
@@ -207,7 +208,6 @@ public class Emprestimos implements IGerenciadorArquivos {
 		Date date = null;
 		try {
 			date = formato.parse(data);
-			System.out.println(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

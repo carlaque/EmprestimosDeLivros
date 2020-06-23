@@ -6,8 +6,9 @@ public class Devolucao {
 	private int codigo;
 	private Date dataDevolucao;
 	
-	public void Devolver(Date data) {
+	public void Devolver(Date data, int codigoDevolucao) {
 		this.dataDevolucao = data;
+		this.codigo = codigoDevolucao;
 	}
 	
 

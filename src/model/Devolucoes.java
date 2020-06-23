@@ -20,7 +20,7 @@ import controllers.NO;
 public class Devolucoes implements IGerenciadorArquivos {
 	private final String nome =  "devolucoes.csv";
 	private final String path =  "./";
-	private String cabecalho = "codigo; codigo_emprestimo; data_devolucao\n";
+	private String cabecalho = "codigo; data_devolucao\n";
 	private ListaDevolucao lista;
 	
 	public Devolucoes() throws IOException {
@@ -65,14 +65,12 @@ public class Devolucoes implements IGerenciadorArquivos {
 		FileWriter writer= new FileWriter(arq, true);
 		PrintWriter print = new PrintWriter(writer);
 		
-		if(lista.vazia()) {
-			return ;
-		}
+		if(lista.vazia()) return ;
 		
 		while(!lista.vazia()) {
 			Devolucao a = (Devolucao) lista.removeDoInicio();
 			String conteudo = a.getCodigo() + ";"
-					+ a.getDataDevolucao() + "\n";
+					+ getDataString(a.getDataDevolucao()) + "\n";
 			
 			print.write(conteudo);
 		}
@@ -164,7 +162,10 @@ public class Devolucoes implements IGerenciadorArquivos {
 	}
 	
 	public int getProximoCodigo() {
-		return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo();
+		if(lista.vazia()) 
+			return 0;
+		else
+			return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo();
 	}
 
 	public Date getData(String data) {
@@ -176,6 +177,12 @@ public class Devolucoes implements IGerenciadorArquivos {
 			e.printStackTrace();
 		}
 		return date;
+	}
+	
+	public String getDataString(Date data) {
+		SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+		String dataFormatada = sd.format(data);
+		return dataFormatada;
 	}
 
 }
