@@ -156,7 +156,7 @@ public class Alunos implements IGerenciadorArquivos {
 		NO<T> aux = (NO<T>) lista.getInicio();
 		int pos = -1;
 		boolean percorre = true;
-		while(aux.getProximo() != null && percorre) {
+		while(aux != null && percorre) {
 			Leitor l = (Leitor) aux.getDado();
 			if(l.getCodigo() == codigo) percorre = false;
 			aux = aux.getProximo();
@@ -168,6 +168,7 @@ public class Alunos implements IGerenciadorArquivos {
 	
 	public Leitor buscaPeloCodigo(int codigo) {
 		int pos = getPosicaoDoCodigo(codigo)  ;
+		System.out.println(pos);
 		if(pos > -1) return lista.buscaNaPosicao(lista.getInicio(), pos+ 1).getDado();
 		return null;
 	}

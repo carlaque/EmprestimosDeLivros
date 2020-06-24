@@ -89,8 +89,6 @@ public class Emprestimo {
 		this.devolucao = devolucao;
 	}
 
-	
-
 	public String getCategoria() {
 		return categoria;
 	}

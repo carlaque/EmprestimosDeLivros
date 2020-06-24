@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,35 +41,35 @@ public class Menu extends JFrame {
 		emprestimos = new Emprestimos(livros, alunos, professores, devolucoes);
 		
 		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Menu frame = new Menu();
-					frame.setVisible(true);
+		try {
+			Menu frame = new Menu();
+			frame.setVisible(true);
+			
+			frame.addWindowListener(new WindowAdapter() {
+	            @Override
+	            public void windowClosing(WindowEvent e) {
+	            	
+					try {
+						emprestimos.salvarLista();
+						livros.salvarLista();
+		        		professores.salvarLista();
+		        		alunos.salvarLista();
+		        		devolucoes.salvarLista();
+					} catch (IOException e1) {
+						System.out.println("Nao foi possivel salvar os dados.");
+						e1.printStackTrace();
+					}
 					
 					
-					frame.addWindowListener(new WindowAdapter() {
-			            @Override
-			            public void windowClosing(WindowEvent e) {
-			            	try {
-								emprestimos.salvarLista();
-								livros.salvarLista();
-				        		professores.salvarLista();
-				        		alunos.salvarLista();
-				        		devolucoes.salvarLista();
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
-			        		
-			                System.exit(0);
-			            }
-			        });
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	        		
+	                System.exit(0);
+	            }
+	        });
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
@@ -96,6 +95,9 @@ public class Menu extends JFrame {
 		contentPane.add(btnDevolucao);
 		btnDevolucao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				EfetuarDevolucao frame = new EfetuarDevolucao(devolucoes, emprestimos);
+				frame.setVisible(true);
 				
 			}
 		});
@@ -133,6 +135,9 @@ public class Menu extends JFrame {
 		contentPane.add(btnEmprestimo);
 		btnEmprestimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		
+				EfetuarEmprestimo frame = new EfetuarEmprestimo(emprestimos, livros, alunos, professores);
+				frame.setVisible(true);
 				
 			}
 		});
@@ -154,6 +159,9 @@ public class Menu extends JFrame {
 		contentPane.add(btnCadastrarProfessor);
 		btnCadastrarProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				CadastroProfessor frame = new CadastroProfessor(professores);
+				frame.setVisible(true);
 				
 			}
 		});

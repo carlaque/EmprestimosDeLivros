@@ -34,7 +34,6 @@ public class CadastroAluno extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastroAluno(Alunos alunos) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 451, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5))	;
@@ -55,10 +54,11 @@ public class CadastroAluno extends JFrame {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Aluno a = new Aluno();
-				a.cadastrar(alunos.getProximoCodigo(), txtFldNomeAluno.getText(), txtFieldEnderecoAluno.getText(), txtFieldEmailAluno.getText(),
-						txtFieldTelefoneAluno.getText(), "todos", txtFieldRA.getText(), 0);
+				
 				try {
+					Aluno a = new Aluno();
+					a.cadastrar(alunos.getProximoCodigo(), txtFldNomeAluno.getText(), txtFieldEnderecoAluno.getText(), txtFieldEmailAluno.getText(),
+							txtFieldTelefoneAluno.getText(), "todos", txtFieldRA.getText(), 0);
 					alunos.insereCadastro(a);
 					
 					JOptionPane.showMessageDialog(null,

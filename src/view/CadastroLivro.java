@@ -35,7 +35,6 @@ public class CadastroLivro extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastroLivro(Livros livros) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -47,7 +46,6 @@ public class CadastroLivro extends JFrame {
 		contentPane.add(btnCancelar);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        setVisible(false);
 			}
 		});

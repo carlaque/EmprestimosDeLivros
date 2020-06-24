@@ -146,7 +146,7 @@ public class Devolucoes implements IGerenciadorArquivos {
 		NO<T> aux = (NO<T>) lista.getInicio();
 		int pos = -1;
 		boolean percorre = true;
-		while(aux.getProximo() != null && percorre) {
+		while(aux != null && percorre) {
 			Devolucao l = (Devolucao) aux.getDado();
 			if(l.getCodigo() == codigo) percorre = false;
 			aux = aux.getProximo();
