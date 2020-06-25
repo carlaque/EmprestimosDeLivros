@@ -1,5 +1,3 @@
 codigo; dataEmprestimo; dataLimite; codigo_leitor; codigo_livro; categoria; renovacao;codigo_devolucao
-0;24/06/2020;08/07/2020;0;0;todos;false;0
-1;24/06/2020;08/07/2020;1;1;todos;false;1
-2;24/06/2020;08/07/2020;0;1;todos;false;2
-3;24/06/2020;08/07/2020;1;0;todos;false;3
+0;25/06/2020;09/07/2020;0;1;todos;false;0
+1;25/06/2020;09/07/2020;1;0;todos;false;1

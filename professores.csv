@@ -1,5 +1,6 @@
 codigo; nome; endereco; email; telefone; categoria; CPF; emprestimos correntes
-0;ro;ro;ro;ro;todos;ro;0
-0;ro;ro;ro;ro;todos;ro;0
-0;ro;ro;ro;ro;todos;ro;0
-0;ro;ro;ro;ro;todos;ro;0
+0;Ricardo;Rua dos conrados;ricardo@gmail.como;21321321321;todos;2213213;0
+1;Mariliaq;rua das margaridads;marialia@gmail.com;2132132132;todos;4213213;0
+0;Ricardo;Rua dos conrados;ricardo@gmail.como;21321321321;todos;2213213;0
+1;Mariliaq;rua das margaridads;marialia@gmail.com;2132132132;todos;4213213;0
+2;Marlene;rua da consolação, 1234;marlene@gmail.com;1165465462;todos;123456465;0
