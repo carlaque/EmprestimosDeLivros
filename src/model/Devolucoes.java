@@ -41,7 +41,7 @@ public class Devolucoes implements IGerenciadorArquivos {
 			String linha = buffer.readLine();			
 			while(linha != null) {
 				String[] aux = linha.split(";");
-				if(!aux[0].equals("codigo")) {
+				if(aux.length > 0 && !aux[0].equals("codigo")) {
 					Devolucao dev = new Devolucao();
 					
 					dev.carregarDevolucoes(Integer.parseInt(aux[0]),getData(aux[1])); 
@@ -158,14 +158,15 @@ public class Devolucoes implements IGerenciadorArquivos {
 	
 	public Devolucao buscaPeloCodigo(int codigo) {
 		int pos = getPosicaoDoCodigo(codigo) ;
-		return lista.buscaNaPosicao(lista.getInicio(), pos+ 1).getDado();
+		if(pos > -1) return lista.buscaNaPosicao(lista.getInicio(), pos+ 1).getDado();
+		else return  null;
 	}
 	
 	public int getProximoCodigo() {
 		if(lista.vazia()) 
 			return 0;
 		else
-			return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo();
+			return lista.buscaUltimo(lista.getInicio()).getDado().getCodigo() + 1;
 	}
 
 	public Date getData(String data) {
@@ -183,6 +184,10 @@ public class Devolucoes implements IGerenciadorArquivos {
 		SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
 		String dataFormatada = sd.format(data);
 		return dataFormatada;
+	}
+	
+	public ListaDevolucao getLista() {
+		return this.lista;
 	}
 
 }

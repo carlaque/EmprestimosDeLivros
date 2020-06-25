@@ -168,7 +168,6 @@ public class Alunos implements IGerenciadorArquivos {
 	
 	public Leitor buscaPeloCodigo(int codigo) {
 		int pos = getPosicaoDoCodigo(codigo)  ;
-		System.out.println(pos);
 		if(pos > -1) return lista.buscaNaPosicao(lista.getInicio(), pos+ 1).getDado();
 		return null;
 	}

@@ -108,6 +108,9 @@ public class Menu extends JFrame {
 		contentPane.add(btnConsultarLivro);
 		btnConsultarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				ConsultarLivro frame = new ConsultarLivro(livros);
+				frame.setVisible(true);
 				
 			}
 		});
@@ -118,6 +121,9 @@ public class Menu extends JFrame {
 		btnConsultarAluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				ConsultarAluno frame = new ConsultarAluno(alunos);
+				frame.setVisible(true);
+				
 			}
 		});
 		
@@ -126,6 +132,9 @@ public class Menu extends JFrame {
 		contentPane.add(btnConsultarProfessor);
 		btnConsultarProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				ConsultarProfessor frame = new ConsultarProfessor(professores);
+				frame.setVisible(true);
 				
 			}
 		});

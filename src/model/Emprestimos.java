@@ -61,8 +61,9 @@ public class Emprestimos implements IGerenciadorArquivos {
 					Livro li = livros.buscaPeloCodigo(Integer.parseInt(aux[4]));
 					
 					Devolucao devolucao = null;
-					if(aux.length == 7) {
-						devolucao = devolucoes.buscaPeloCodigo(Integer.parseInt(aux[7]));
+					if(aux.length == 8) {
+						int cod = Integer.parseInt(aux[7]); 
+						devolucao = devolucoes.buscaPeloCodigo(cod);
 					}
 					
 					boolean renovacao = false;
@@ -181,7 +182,7 @@ public class Emprestimos implements IGerenciadorArquivos {
 		NO<T> aux = (NO<T>) lista.getInicio();
 		int pos = -1;
 		boolean percorre = true;
-		while(aux.getProximo() != null && percorre) {
+		while(aux != null && percorre) {
 			Emprestimo l = (Emprestimo) aux.getDado();
 			if(l.getCodigo() == codigo) percorre = false;
 			aux = aux.getProximo();

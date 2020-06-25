@@ -3,6 +3,8 @@ package view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -14,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.Caret;
 
 import controllers.Emprestimo;
 import controllers.Leitor;
@@ -63,13 +66,15 @@ public class EfetuarDevolucao extends JFrame {
 			
 				
 					int codEmprestimo = Integer.parseInt(txtCodigoEmprestimo.getText());
+					Emprestimo novo = new Emprestimo(); 
+					novo = emprestimos.buscaPeloCodigo(codEmprestimo);
 					
-					
-					Emprestimo novo = emprestimos.buscaPeloCodigo(codEmprestimo);
-					if(novo != null) {						
+					if(novo != null && novo.getDevolucao() == null) {						
 						try {
 							novo.devolverLivro(devolucoes.getProximoCodigo());
+							
 							devolucoes.insereCadastro(novo.getDevolucao());
+							
 							JOptionPane.showMessageDialog(null,
 								    "Emprestimo do livro " + novo.getLivro().getTitulo() + " ao leitor " + novo.getLeitor().getNome() + " foi finalizado com sucesso!",
 								    "Emprestimo",
@@ -83,6 +88,8 @@ public class EfetuarDevolucao extends JFrame {
 						}
 					
 					}else {
+						System.out.println(novo.getDevolucao().getCodigo());
+						
 						JOptionPane.showMessageDialog(null,
 							    "Não foi possivel finalizar o emprestimo, por favor verifique o codigo do livro.",
 							    "Devolução",
@@ -92,6 +99,7 @@ public class EfetuarDevolucao extends JFrame {
 					
 					
 					txtCodigoEmprestimo.setText("");
+					novo = null;
 				
 			}
 		});
@@ -156,6 +164,52 @@ public class EfetuarDevolucao extends JFrame {
 		lblDataLimite.setBounds(12, 407, 410, 20);
 		contentPane.add(lblDataLimite);
 		
-		
+		txtCodigoEmprestimo.addKeyListener( new KeyListener(){
+			@Override
+			public void keyTyped(KeyEvent e)
+			{}
+
+			@Override
+			public void keyPressed(KeyEvent e) { }
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				int codEmprestimo = -1;
+				if(!txtCodigoEmprestimo.getText().equals("")) {
+					try {
+						codEmprestimo = Integer.parseInt(txtCodigoEmprestimo.getText());						
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(null,
+							    "O codigo de um emprestimo sempre é um numero.",
+							    "Devolução",
+							    JOptionPane.ERROR_MESSAGE);
+						txtNomeLeitor.setText("");
+						txtNomeLivro.setText("");
+						txtlDataLimite.setText("");	
+					}
+					Emprestimo novo = new Emprestimo(); 
+					novo = emprestimos.buscaPeloCodigo(codEmprestimo);
+					
+					if(novo != null) {
+						txtNomeLeitor.setText(novo.getLeitor().getNome());
+						txtNomeLivro.setText(novo.getLivro().getTitulo());
+						txtlDataLimite.setText( emprestimos.getDataString(novo.getDataLimite()));						
+					}else {
+						JOptionPane.showMessageDialog(null,
+							    "O codigo de emprestimo invalido, tente outro.",
+							    "Devolução",
+							    JOptionPane.ERROR_MESSAGE);
+						txtNomeLeitor.setText("");
+						txtNomeLivro.setText("");
+						txtlDataLimite.setText("");	
+					}
+				}else {
+					txtNomeLeitor.setText("");
+					txtNomeLivro.setText("");
+					txtlDataLimite.setText("");	
+				}
+				
+			}
+		});
 	}
 }

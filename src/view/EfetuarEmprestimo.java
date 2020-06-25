@@ -69,7 +69,7 @@ public class EfetuarEmprestimo extends JFrame {
 					
 					
 					if(cmbCategoriaLeitor.getSelectedIndex() == 0) 
-						leitor = alunos.buscaPeloCodigo( 0 );					
+						leitor = alunos.buscaPeloCodigo( codLeitor );					
 					else if(cmbCategoriaLeitor.getSelectedIndex() == 1)
 						leitor = professores.buscaPeloCodigo( codLeitor );
 					
@@ -98,6 +98,7 @@ public class EfetuarEmprestimo extends JFrame {
 					
 					
 					txtCodigoLeitor.setText("");
+					txtCodigoLivro.setText("");
 				
 			}
 		});

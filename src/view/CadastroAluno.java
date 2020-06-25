@@ -46,7 +46,6 @@ public class CadastroAluno extends JFrame {
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        setVisible(false);
 			}
 		});

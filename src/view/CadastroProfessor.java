@@ -34,7 +34,6 @@ public class CadastroProfessor extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastroProfessor(Professores professores) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 451, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5))	;
@@ -47,7 +46,6 @@ public class CadastroProfessor extends JFrame {
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        setVisible(false);
 			}
 		});

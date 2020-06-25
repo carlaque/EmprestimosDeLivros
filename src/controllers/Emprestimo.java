@@ -58,7 +58,7 @@ public class Emprestimo {
 	}
 	
 	public void renovarEmprestimo() {
-		if(!this.renovacao ) {//|| !this.leitor.getCategoria().equals("total")) { // TODO verificar a questao do leitor 
+		if(!this.renovacao || !this.leitor.getCategoria().equals("todos")) { // TODO verificar a questao do leitor 
 			Calendar c = Calendar.getInstance();
 	        c.setTime(this.dataLimite);
 	        c.add(Calendar.DATE, 14);
@@ -68,7 +68,7 @@ public class Emprestimo {
 	}
 	
 	public void devolverLivro(int codigoDevolucao) {
-		devolucao = new Devolucao();
+		this.devolucao = new Devolucao();
 		Date data = new Date();
 		devolucao.Devolver(data, codigoDevolucao);
 		this.livro.devolver();

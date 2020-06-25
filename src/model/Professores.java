@@ -166,10 +166,9 @@ public class Professores implements IGerenciadorArquivos {
 	}
 	
 	public Leitor buscaPeloCodigo(int codigo) {
-		int pos = getPosicaoDoCodigo(codigo) ;
-		if( pos > -1)
-			return lista.buscaNaPosicao(lista.getInicio(), pos + 1).getDado();
-		else return null;
+		int pos = getPosicaoDoCodigo(codigo)  ;
+		if(pos > -1) return lista.buscaNaPosicao(lista.getInicio(), pos+ 1).getDado();
+		return null;
 	}
 	
 	public int getProximoCodigo() {
