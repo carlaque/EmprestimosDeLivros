@@ -43,7 +43,7 @@ public class ConsultarAluno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultarAluno( Alunos alunos) {
+	public ConsultarAluno( final Alunos alunos) {
 		setBounds(100, 100, 451, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5))	;

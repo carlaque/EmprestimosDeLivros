@@ -42,7 +42,7 @@ public class EfetuarDevolucao extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EfetuarDevolucao(Devolucoes devolucoes, Emprestimos emprestimos) {
+	public EfetuarDevolucao(final Devolucoes devolucoes, final Emprestimos emprestimos) {
 		setBounds(100, 100, 451, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5))	;

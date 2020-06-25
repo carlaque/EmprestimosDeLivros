@@ -36,8 +36,12 @@ public class EfetuarEmprestimo extends JFrame {
 	
 	/**
 	 * Create the frame.
+	 * @param professores 
+	 * @param alunos 
+	 * @param livros 
+	 * @param emprestimos 
 	 */
-	public EfetuarEmprestimo(Emprestimos emprestimos, Livros livros, Alunos alunos, Professores professores) {
+	public EfetuarEmprestimo(final Emprestimos emprestimos, final Livros livros, final Alunos alunos, final Professores professores) {
 		setBounds(100, 100, 451, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5))	;
@@ -90,7 +94,7 @@ public class EfetuarEmprestimo extends JFrame {
 							    JOptionPane.PLAIN_MESSAGE);
 					}else {
 						JOptionPane.showMessageDialog(null,
-							    "Não foi possivel realizar o emprestimo, por favor verifique o codigo do leitor e o codigo do livro.",
+							    "Nï¿½o foi possivel realizar o emprestimo, por favor verifique o codigo do leitor e o codigo do livro.",
 							    "Emprestimo",
 							    JOptionPane.ERROR_MESSAGE);
 					}

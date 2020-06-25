@@ -34,7 +34,7 @@ public class CadastroLivro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastroLivro(Livros livros) {
+	public CadastroLivro(final Livros livros) {
 		setBounds(100, 100, 450, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

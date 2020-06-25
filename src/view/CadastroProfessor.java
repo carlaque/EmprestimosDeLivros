@@ -33,7 +33,7 @@ public class CadastroProfessor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastroProfessor(Professores professores) {
+	public CadastroProfessor(final Professores professores) {
 		setBounds(100, 100, 451, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5))	;

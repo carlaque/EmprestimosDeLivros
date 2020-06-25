@@ -44,7 +44,7 @@ public class ConsultarProfessor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultarProfessor( Professores professores) {
+	public ConsultarProfessor( final Professores professores) {
 		setBounds(100, 100, 451, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5))	;

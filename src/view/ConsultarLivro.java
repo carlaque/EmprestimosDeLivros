@@ -42,7 +42,7 @@ public class ConsultarLivro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultarLivro( Livros livros) {
+	public ConsultarLivro( final Livros livros) {
 		setBounds(100, 100, 451, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5))	;
